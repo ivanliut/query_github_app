@@ -1,0 +1,12 @@
+{
+  "name": "query_github",
+  "displayName": "query_github",
+  "expo": {
+    "name": "query_github",
+    "slug": "query_github",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
