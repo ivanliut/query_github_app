@@ -5,6 +5,7 @@
     "ios": "react-native run-ios",
     "web": "expo start --web",
     "start": "react-native start",
+    "prettier": "./node_modules/.bin/prettier 'src/**/*.{js,json,scss}' --write",
     "test": "jest"
   },
   "dependencies": {
@@ -25,6 +26,7 @@
     "@babel/core": "~7.9.0",
     "babel-jest": "~25.2.6",
     "jest": "~25.2.6",
+    "prettier": "2.2.1",
     "react-test-renderer": "~16.13.1"
   },
   "jest": {
