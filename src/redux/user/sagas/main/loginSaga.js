@@ -2,7 +2,8 @@ import { select, put } from 'redux-saga/effects';
 
 import { navigationHelper } from '../../../../navigation/utils/navigationHelpers';
 import { STACKS } from '../../../../navigation/constants';
-import {saveUserLogin} from "../../actions";
+import { saveUserLogin } from '../../actions';
+
 export default function* loginSaga({ payload }) {
   const { username, token } = payload;
   console.log('LOG IN request has been sent', { username, token });
@@ -15,14 +16,12 @@ export default function* loginSaga({ payload }) {
   });
 
   if (response.status === 200) {
-    console.log(response);
-    debugger;
+    const { login } = yield response.json();
+    yield put(saveUserLogin(login));
+
     navigationHelper.reset({
       index: 0,
       routes: [{ name: STACKS.MainStack }],
     });
-
-    const { login } = yield response.json();
-    yield put(saveUserLogin(login))
   }
 }

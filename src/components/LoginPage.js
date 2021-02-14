@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 
 import { loginUser } from '../redux/user/actions';
-import { selectIsUserLoggedIn } from '../redux/user/selectors';
 import { STACKS } from '../navigation/constants';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const LoginPage = ({ navigation }) => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsUserLoggedIn);
 
   const [username, onChangeUsername] = useState('');
   const [token, onChangeToken] = useState('');
@@ -53,6 +51,7 @@ const LoginPage = ({ navigation }) => {
           paddingHorizontal: 5,
           marginBottom: 5,
         }}
+        secureTextEntry={true}
         autoCapitalize="none"
         placeholder="Token"
         onChangeText={(text) => onChangeToken(text)}
