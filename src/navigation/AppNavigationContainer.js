@@ -6,9 +6,11 @@ import { View } from 'react-native';
 import LoginStack from './stacks/LoginStack';
 import MainStack from './stacks/MainStack';
 import { STACKS } from './constants';
+import { navigationHelper } from './utils/navigationHelpers';
 
 const Stack = createStackNavigator();
 const rootNavigationRef = createRef();
+navigationHelper.setRootNavigationRef(rootNavigationRef);
 
 const AppNavigationContainer = () => {
   return (
