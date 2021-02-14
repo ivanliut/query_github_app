@@ -1,4 +1,4 @@
-import { select, put } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 
 import { navigationHelper } from '../../../../navigation/utils/navigationHelpers';
 import { STACKS } from '../../../../navigation/constants';

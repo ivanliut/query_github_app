@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Dimensions } from 'react-native';
+import { View, Text, TextInput, Dimensions, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectUserLogin } from '../redux/user/selectors';
+import { searchForRepo } from '../redux/search/actions';
 
 const { width: screenWidth } = Dimensions.get('window');
 
 const MainPage = () => {
+  const dispatch = useDispatch();
+
   const login = useSelector(selectUserLogin);
-  const [repo, onChangeRepo] = useState('');
+  const [repoName, onChangeRepoName] = useState('');
 
   return (
     <View
@@ -29,11 +32,23 @@ const MainPage = () => {
           marginVertical: 10,
         }}
         autoCapitalize="none"
-        placeholder="Token"
-        onChangeText={(text) => onChangeRepo(text)}
-        value={repo}
-        maxLength={40}
+        placeholder="repo name"
+        onChangeText={(text) => onChangeRepoName(text)}
+        value={repoName}
+        maxLength={30}
       />
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'green',
+          paddingHorizontal: 10,
+          paddingVertical: 5,
+          borderRadius: 5,
+        }}
+        onPress={() => {
+          dispatch(searchForRepo.init(repoName));
+        }}>
+        <Text>Search</Text>
+      </TouchableOpacity>
     </View>
   );
 };
