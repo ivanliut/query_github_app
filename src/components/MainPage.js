@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, Dimensions, TouchableOpacity, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectUserLogin } from '../redux/user/selectors';
+import { selectSearchItems, selectSearchTotalCount } from '../redux/search/selectors';
 import { searchForRepo } from '../redux/search/actions';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -11,7 +12,11 @@ const MainPage = () => {
   const dispatch = useDispatch();
 
   const login = useSelector(selectUserLogin);
+  const items = useSelector(selectSearchItems);
+  const totalCount = useSelector(selectSearchTotalCount);
+
   const [repoName, onChangeRepoName] = useState('');
+  const [page, setPage] = useState(1);
 
   return (
     <View
@@ -45,10 +50,32 @@ const MainPage = () => {
           borderRadius: 5,
         }}
         onPress={() => {
-          dispatch(searchForRepo.init(repoName));
+          dispatch(searchForRepo.init({ repoName, page }));
         }}>
         <Text>Search</Text>
       </TouchableOpacity>
+      <FlatList
+        data={items}
+        renderItem={({ item, index }) => {
+          return (
+            <View style={{}}>
+              <Text>{item.name}</Text>
+              <Text>{item.full_name}</Text>
+              <Text>{item.html_url}</Text>
+            </View>
+          );
+        }}
+        keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={() => (
+          <View
+            style={{
+              backgroundColor: 'black',
+              height: 1,
+              marginVertical: 10,
+            }}
+          />
+        )}
+      />
     </View>
   );
 };
