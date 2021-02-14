@@ -6,4 +6,6 @@ export const TYPES = {
 
 // Redux store constants
 export const search = 'search';
+export const totalCount = 'total_count';
+export const items = 'items';
 export const repo = 'repo';

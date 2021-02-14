@@ -1,3 +1,7 @@
+import { put } from 'redux-saga/effects';
+
+import { searchForRepo } from '../../actions';
+
 export default function* searchSaga({ payload }) {
   const response = yield fetch(`https://api.github.com/search/repositories?q=${payload}+in:name`, {
     method: 'GET',
@@ -7,6 +11,7 @@ export default function* searchSaga({ payload }) {
   });
 
   if (response.status === 200) {
-    const result = yield response.json();
+    const { total_count, items } = yield response.json();
+    yield put(searchForRepo.success({ total_count, items }));
   }
 }

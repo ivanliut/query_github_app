@@ -7,7 +7,7 @@ export const searchReducer = (state = initialState, action) => {
     case TYPES.SEARCH_FORT_REPO.SUCCESS:
       console.log(action);
       debugger;
-      return { ...state };
+      return { ...state, ...action.payload };
     default:
       return {
         ...state,
