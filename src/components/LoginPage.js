@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import { loginUser } from '../redux/user/actions';
 import { selectIsUserLoggedIn } from '../redux/user/selectors';
+import { STACKS } from '../navigation/constants';
 
-const LoginPage = () => {
+const LoginPage = ({ navigation }) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsUserLoggedIn);
 
@@ -14,8 +15,28 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <View>
-      {isLoggedIn ? <Text>Hello There!</Text> : <Text>Login</Text>}
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+      }}>
+      <TouchableOpacity
+        style={{
+          backgroundColor: 'green',
+          paddingHorizontal: 10,
+          paddingVertical: 5,
+          borderRadius: 5
+        }}
+        onPress={() => {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: STACKS.MainStack }],
+          });
+        }}>
+        <Text>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 };
