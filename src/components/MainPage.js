@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+
+import {selectUserLogin} from "../redux/user/selectors";
 
 const MainPage = () => {
+    const login = useSelector(selectUserLogin);
   return (
     <View
       style={{
@@ -9,7 +13,7 @@ const MainPage = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text>MainPage</Text>
+      <Text>Hello {login}</Text>
     </View>
   );
 };
