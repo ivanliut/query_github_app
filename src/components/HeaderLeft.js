@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-const MoveMoneyConfirmPage = ({ onPress }) => {
+const HeaderLeft = ({ onPress }) => {
   return (
     <View
       style={{
@@ -14,4 +14,4 @@ const MoveMoneyConfirmPage = ({ onPress }) => {
   );
 };
 
-export default MoveMoneyConfirmPage;
+export default HeaderLeft;

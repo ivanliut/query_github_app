@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUserLogin } from '../../redux/user/selectors';
 import { selectSearchItems, selectSearchTotalCount } from '../../redux/search/selectors';
 import { searchForRepo } from '../../redux/search/actions';
+import { setFullScreenModal } from '../../redux/app/actions';
 import { name, fullName, htmlUrl } from '../../redux/search/constants';
-import { PAGES } from '../../navigation/constants';
 
 import styles from './styles';
 
-const MainPage = ({ navigation }) => {
+const MainPage = () => {
   const dispatch = useDispatch();
 
   const login = useSelector(selectUserLogin);
@@ -65,10 +65,7 @@ const MainPage = ({ navigation }) => {
         }}
         data={items}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(PAGES.RepoPage, { url: item[htmlUrl] });
-            }}>
+          <TouchableOpacity onPress={() => dispatch(setFullScreenModal({ isFullScreen: true, url: item[htmlUrl] }))}>
             <Text>{item[name]}</Text>
             <Text>{item[fullName]}</Text>
           </TouchableOpacity>

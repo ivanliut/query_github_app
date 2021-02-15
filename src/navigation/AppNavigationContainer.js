@@ -7,6 +7,7 @@ import LoginStack from './stacks/LoginStack';
 import MainStack from './stacks/MainStack';
 import { STACKS } from './constants';
 import { navigationHelper } from './utils/navigationHelpers';
+import Modal from '../components/Modal';
 
 const Stack = createStackNavigator();
 const rootNavigationRef = createRef();
@@ -21,6 +22,7 @@ const AppNavigationContainer = () => {
           <Stack.Screen name={STACKS.MainStack} component={MainStack} />
         </Stack.Navigator>
       </NavigationContainer>
+      <Modal />
     </View>
   );
 };
