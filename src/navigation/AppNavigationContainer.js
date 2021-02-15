@@ -16,7 +16,7 @@ const AppNavigationContainer = () => {
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer ref={rootNavigationRef}>
-        <Stack.Navigator>
+        <Stack.Navigator headerMode={'none'}>
           <Stack.Screen name={STACKS.LoginStack} component={LoginStack} />
           <Stack.Screen name={STACKS.MainStack} component={MainStack} />
         </Stack.Navigator>

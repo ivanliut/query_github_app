@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
+import {colorsMap} from "../../styles/colorsMap";
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -7,7 +8,8 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colorsMap.white,
+    opacity: 0.7
   },
   input: {
     height: 40,
@@ -19,7 +21,7 @@ export default StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: 'green',
+    backgroundColor: colorsMap.fireEngineRed3opacity,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,
