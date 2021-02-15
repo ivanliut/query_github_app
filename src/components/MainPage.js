@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUserLogin } from '../redux/user/selectors';
 import { selectSearchItems, selectSearchTotalCount } from '../redux/search/selectors';
 import { searchForRepo } from '../redux/search/actions';
+import { PAGES } from '../navigation/constants';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-const MainPage = () => {
+const MainPage = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const login = useSelector(selectUserLogin);
@@ -56,16 +57,21 @@ const MainPage = () => {
       </TouchableOpacity>
       <FlatList
         data={items}
-        renderItem={({ item, index }) => {
+        renderItem={({ item }) => {
           return (
-            <View style={{}}>
+            <TouchableOpacity
+              style={{
+                width: screenWidth - 40,
+              }}
+              onPress={() => {
+                navigation.navigate(PAGES.RepoPage, { url: item.html_url });
+              }}>
               <Text>{item.name}</Text>
               <Text>{item.full_name}</Text>
-              <Text>{item.html_url}</Text>
-            </View>
+            </TouchableOpacity>
           );
         }}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => (
           <View
             style={{
