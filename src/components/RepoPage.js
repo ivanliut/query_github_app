@@ -11,9 +11,6 @@ const RepoPage = () => {
       source={{
         uri: route.params?.url,
       }}
-      onMessage={() => {
-        console.log('onMessage');
-      }}
     />
   );
 };

@@ -4,6 +4,11 @@ import { searchForRepo } from '../../actions';
 
 export default function* searchSaga({ payload }) {
   const { repoName, page } = payload;
+
+  if (!repoName) {
+    return;
+  }
+
   const response = yield fetch(
     `https://api.github.com/search/repositories?q=${repoName}+in:name&page=${page}&per_page=15`,
     {

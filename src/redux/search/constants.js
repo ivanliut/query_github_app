@@ -1,7 +1,7 @@
 import { createReduxAsyncType } from '../utils/reduxUtils';
 
 export const TYPES = {
-  SEARCH_FORT_REPO: createReduxAsyncType('ON_UPLOAD_CAMERA_IMAGE'),
+  SEARCH_FOR_REPO: createReduxAsyncType('SEARCH_FOR_REPO'),
 };
 
 // Redux store constants

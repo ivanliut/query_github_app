@@ -6,7 +6,6 @@ import { saveUserLogin } from '../../actions';
 
 export default function* loginSaga({ payload }) {
   const { username, token } = payload;
-  console.log('LOG IN request has been sent', { username, token });
   const response = yield fetch('https://api.github.com/user', {
     method: 'GET',
     headers: {

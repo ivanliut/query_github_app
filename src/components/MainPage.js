@@ -17,7 +17,10 @@ const MainPage = ({ navigation }) => {
   const totalCount = useSelector(selectSearchTotalCount);
 
   const [repoName, onChangeRepoName] = useState('');
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
+
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [firstRender, setFirstRender] = useState(true);
 
   return (
     <View
@@ -51,11 +54,31 @@ const MainPage = ({ navigation }) => {
           borderRadius: 5,
         }}
         onPress={() => {
-          dispatch(searchForRepo.init({ repoName, page }));
+          dispatch(searchForRepo.init({ repoName, page: 1 }));
         }}>
         <Text>Search</Text>
       </TouchableOpacity>
       <FlatList
+        onEndReachedThreshold={0.01}
+        onEndReached={() => {
+          if (firstRender) {
+            setFirstRender(false);
+            return;
+          }
+
+          if (loadingMore) {
+            return;
+          }
+
+          if (page > totalCount) {
+            return;
+          }
+
+          setLoadingMore(true);
+          dispatch(searchForRepo.init({ repoName, page }));
+          setPage((prevPage) => prevPage + 1);
+          setLoadingMore(false);
+        }}
         data={items}
         renderItem={({ item }) => {
           return (

@@ -3,5 +3,5 @@ import { TYPES } from '../constants';
 import searchSaga from './main/searchSaga';
 
 export default function* searchForRepoSaga() {
-  yield takeLatest(TYPES.SEARCH_FORT_REPO.INIT, searchSaga);
+  yield takeLatest(TYPES.SEARCH_FOR_REPO.INIT, searchSaga);
 }

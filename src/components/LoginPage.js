@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 
 import { loginUser } from '../redux/user/actions';
-import { STACKS } from '../navigation/constants';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -65,14 +64,7 @@ const LoginPage = ({ navigation }) => {
           paddingVertical: 5,
           borderRadius: 5,
         }}
-        onPress={() => {
-          console.log({ username, token });
-          // navigation.reset({
-          //   index: 0,
-          //   routes: [{ name: STACKS.MainStack }],
-          // });
-          dispatch(loginUser({ username, token }));
-        }}>
+        onPress={() => dispatch(loginUser({ username, token }))}>
         <Text>Login</Text>
       </TouchableOpacity>
     </View>
