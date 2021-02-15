@@ -2,11 +2,13 @@ import { put } from 'redux-saga/effects';
 
 import { navigationHelper } from '../../../../navigation/utils/navigationHelpers';
 import { STACKS } from '../../../../navigation/constants';
-import { saveUserLogin } from '../../actions';
+import { loginUser } from '../../actions';
+import { BASE_URL } from '../../../../constants';
 
 export default function* loginSaga({ payload }) {
   const { username, token } = payload;
-  const response = yield fetch('https://api.github.com/user', {
+
+  const response = yield fetch(`${BASE_URL}/user`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -16,7 +18,7 @@ export default function* loginSaga({ payload }) {
 
   if (response.status === 200) {
     const { login } = yield response.json();
-    yield put(saveUserLogin(login));
+    yield put(loginUser.success(login));
 
     navigationHelper.reset({
       index: 0,

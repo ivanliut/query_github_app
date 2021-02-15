@@ -1,9 +1,9 @@
+import { createReduxAsyncType } from '../utils/reduxUtils';
+
 export const TYPES = {
-  LOG_IN_USER: 'LOG_IN_USER',
-  SAVE_USER_LOGIN: 'SAVE_USER_LOGIN',
+  LOG_IN_USER: createReduxAsyncType('LOG_IN_USER'),
 };
 
 // Redux store constants
 export const user = 'user';
 export const userLogin = 'userLogin';
-export const IS_LOGGED_IN = 'IS_LOGGED_IN';

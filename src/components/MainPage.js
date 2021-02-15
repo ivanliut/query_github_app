@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUserLogin } from '../redux/user/selectors';
 import { selectSearchItems, selectSearchTotalCount } from '../redux/search/selectors';
 import { searchForRepo } from '../redux/search/actions';
+import { name, fullName, htmlUrl } from '../redux/search/constants';
 import { PAGES } from '../navigation/constants';
 
 const { width: screenWidth } = Dimensions.get('window');
@@ -16,7 +17,7 @@ const MainPage = ({ navigation }) => {
   const items = useSelector(selectSearchItems);
   const totalCount = useSelector(selectSearchTotalCount);
 
-  const [repoName, onChangeRepoName] = useState('');
+  const [repoName, setRepoName] = useState('');
   const [page, setPage] = useState(2);
 
   const [loadingMore, setLoadingMore] = useState(false);
@@ -42,7 +43,7 @@ const MainPage = ({ navigation }) => {
         }}
         autoCapitalize="none"
         placeholder="repo name"
-        onChangeText={(text) => onChangeRepoName(text)}
+        onChangeText={(text) => setRepoName(text)}
         value={repoName}
         maxLength={30}
       />
@@ -87,10 +88,10 @@ const MainPage = ({ navigation }) => {
                 width: screenWidth - 40,
               }}
               onPress={() => {
-                navigation.navigate(PAGES.RepoPage, { url: item.html_url });
+                navigation.navigate(PAGES.RepoPage, { url: item[htmlUrl] });
               }}>
-              <Text>{item.name}</Text>
-              <Text>{item.full_name}</Text>
+              <Text>{item[name]}</Text>
+              <Text>{item[fullName]}</Text>
             </TouchableOpacity>
           );
         }}

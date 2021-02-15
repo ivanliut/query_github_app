@@ -1,14 +1,12 @@
-import { TYPES, IS_LOGGED_IN, userLogin } from './constants';
+import { TYPES, userLogin } from './constants';
 
 const initialState = {
-  [IS_LOGGED_IN]: false,
+  [userLogin]: '',
 };
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TYPES.LOG_IN_USER:
-      return { ...state };
-    case TYPES.SAVE_USER_LOGIN:
+    case TYPES.LOG_IN_USER.SUCCESS:
       return { ...state, [userLogin]: action.payload };
     default:
       return {

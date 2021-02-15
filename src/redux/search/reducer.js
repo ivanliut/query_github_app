@@ -2,7 +2,7 @@ import { TYPES, totalCount, items } from './constants';
 
 const initialState = {
   [totalCount]: 0,
-  [items]: []
+  [items]: [],
 };
 
 export const searchReducer = (state = initialState, action) => {

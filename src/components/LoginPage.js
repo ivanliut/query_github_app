@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { View, Text, TouchableOpacity, TextInput, Dimensions } from 'react-native';
 
 import { loginUser } from '../redux/user/actions';
 
 const { width: screenWidth } = Dimensions.get('window');
 
-const LoginPage = ({ navigation }) => {
+const LoginPage = () => {
   const dispatch = useDispatch();
 
-  const [username, onChangeUsername] = useState('');
-  const [token, onChangeToken] = useState('');
-
-  useEffect(() => {
-    dispatch(loginUser());
-  }, []);
+  const [username, setUsername] = useState('');
+  const [token, setToken] = useState('');
 
   return (
     <View
@@ -36,7 +32,7 @@ const LoginPage = ({ navigation }) => {
         autoCapitalize="none"
         autoCorrect={false}
         placeholder="Username"
-        onChangeText={(text) => onChangeUsername(text)}
+        onChangeText={(text) => setUsername(text)}
         value={username}
         maxLength={40}
       />
@@ -53,7 +49,7 @@ const LoginPage = ({ navigation }) => {
         secureTextEntry={true}
         autoCapitalize="none"
         placeholder="Token"
-        onChangeText={(text) => onChangeToken(text)}
+        onChangeText={(text) => setToken(text)}
         value={token}
         maxLength={40}
       />
@@ -64,7 +60,7 @@ const LoginPage = ({ navigation }) => {
           paddingVertical: 5,
           borderRadius: 5,
         }}
-        onPress={() => dispatch(loginUser({ username, token }))}>
+        onPress={() => dispatch(loginUser.init({ username, token }))}>
         <Text>Login</Text>
       </TouchableOpacity>
     </View>

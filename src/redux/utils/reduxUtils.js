@@ -1,5 +1,3 @@
-export const createReduxAction = (type = '') => (payload = {}) => ({ type, payload });
-
 export const ASYNC_TYPES = {
   INIT: 'INIT',
   SUCCESS: 'SUCCESS',
