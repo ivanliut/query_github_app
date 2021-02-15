@@ -1,7 +1,7 @@
 import { put } from 'redux-saga/effects';
 
 import { searchForRepo } from '../../actions';
-import {BASE_URL, PER_PAGE} from '../../../../constants';
+import { BASE_URL, PER_PAGE } from '../../../../constants';
 
 export default function* searchSaga({ payload }) {
   const { repoName, page } = payload;
@@ -10,12 +10,15 @@ export default function* searchSaga({ payload }) {
     return;
   }
 
-  const response = yield fetch(`${BASE_URL}/search/repositories?q=${repoName}+in:name&page=${page}&per_page=${PER_PAGE}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = yield fetch(
+    `${BASE_URL}/search/repositories?q=${repoName}+in:name&page=${page}&per_page=${PER_PAGE}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
 
   if (response.status === 200) {
     const { total_count, items } = yield response.json();
