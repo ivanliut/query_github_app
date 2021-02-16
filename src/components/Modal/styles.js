@@ -21,12 +21,12 @@ export default StyleSheet.create({
     flex: 1,
   },
   button: {
-      fontSize: 24,
-      marginHorizontal: 10,
-      marginVertical: 5,
+    fontSize: 24,
+    marginHorizontal: 10,
+    marginVertical: 5,
   },
   webviewContainer: {
-      width: screenWidth - 70,
-      height: screenHeight - 120,
+    width: screenWidth - 70,
+    height: screenHeight - 120,
   },
 });

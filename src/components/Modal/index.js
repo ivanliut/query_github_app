@@ -6,6 +6,7 @@ import { WebView } from 'react-native-webview';
 import { setFullScreenModal } from '../../redux/app/actions';
 import { selectIsFullScreenModal, selectWebViewUrl } from '../../redux/app/selectors';
 import { useValueObserver } from '../../hooks/useValueObserver';
+import { useModalAnimation } from './useModalAnimation';
 
 import styles from './styles';
 
@@ -16,28 +17,11 @@ const Modal = () => {
   const isFullScreenModal = useSelector(selectIsFullScreenModal);
   const url = useSelector(selectWebViewUrl);
 
+  const { animatedValue, startAnimation, finishAnimation } = useModalAnimation();
+
   useValueObserver((isModalTriggered) => {
     isModalTriggered && startAnimation();
   }, isFullScreenModal);
-
-  const animatedValue = useRef(new Animated.Value(0)).current;
-
-  const performAnimation = (toValue) => {
-    Animated.timing(animatedValue, {
-      toValue,
-      duration: 700,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const startAnimation = () => {
-    performAnimation(1);
-  };
-
-  const finishAnimation = () => {
-    performAnimation(0);
-  };
 
   return (
     <Animated.View
@@ -67,14 +51,10 @@ const Modal = () => {
               finishAnimation();
               dispatch(setFullScreenModal(false));
             }}>
-            <Text
-              style={styles.button}>
-              Close
-            </Text>
+            <Text style={styles.button}>Close</Text>
           </TouchableOpacity>
         </View>
-        <View
-          style={styles.webviewContainer}>
+        <View style={styles.webviewContainer}>
           <WebView
             source={{
               uri: url,
