@@ -1,14 +1,15 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, TouchableOpacity, Dimensions, StyleSheet, Animated, Easing } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, Animated, Easing } from 'react-native';
 import { WebView } from 'react-native-webview';
 
-import { colorsMap } from '../../styles/colorsMap';
 import { setFullScreenModal } from '../../redux/app/actions';
 import { selectIsFullScreenModal, selectWebViewUrl } from '../../redux/app/selectors';
 import { useValueObserver } from '../../hooks/useValueObserver';
 
-const { height: screenHeight, width: screenWidth } = Dimensions.get('window');
+import styles from './styles';
+
+const { height: screenHeight } = Dimensions.get('window');
 
 const Modal = () => {
   const dispatch = useDispatch();
@@ -41,12 +42,7 @@ const Modal = () => {
   return (
     <Animated.View
       style={[
-        {
-          ...StyleSheet.absoluteFill,
-          backgroundColor: colorsMap.blackOneOpacity,
-          alignItems: 'center',
-          justifyContent: 'center',
-        },
+        styles.root,
         {
           transform: [
             {
@@ -56,24 +52,15 @@ const Modal = () => {
               }),
             },
           ],
-        },
-        {
           opacity: animatedValue.interpolate({
             inputRange: [0, 0.8, 1],
             outputRange: [0, 0, 1],
           }),
         },
       ]}>
-      <View
-        style={{
-          flex: 1,
-          marginVertical: 50,
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-          }}>
-          <View style={{ flex: 1 }} />
+      <View style={styles.container}>
+        <View style={styles.row}>
+          <View style={styles.takeAvailableSpace} />
 
           <TouchableOpacity
             onPress={() => {
@@ -81,22 +68,14 @@ const Modal = () => {
               dispatch(setFullScreenModal(false));
             }}>
             <Text
-              style={{
-                fontSize: 24,
-                marginHorizontal: 10,
-                marginVertical: 5,
-              }}>
+              style={styles.button}>
               Close
             </Text>
           </TouchableOpacity>
         </View>
         <View
-          style={{
-            width: screenWidth - 70,
-            height: screenHeight - 120,
-          }}>
+          style={styles.webviewContainer}>
           <WebView
-            useWebKit={true}
             source={{
               uri: url,
             }}
