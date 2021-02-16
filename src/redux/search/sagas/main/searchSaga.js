@@ -11,7 +11,7 @@ export default function* searchSaga({ payload }) {
   }
 
   const response = yield fetch(
-    `${BASE_URL}/search/repositories?q=${repoName}+in:name&page=${page}&per_page=${PER_PAGE}`,
+    `${BASE_URL}/search/repositories?q=${encodeURIComponent(repoName)}+in:name&page=${page}&per_page=${PER_PAGE}`,
     {
       method: 'GET',
       headers: {
