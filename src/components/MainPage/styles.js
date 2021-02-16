@@ -26,7 +26,7 @@ export default StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,
-    marginBottom: 15,
+    marginVertical: 15,
   },
   list: {
     width: screenWidth - 40,

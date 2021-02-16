@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TextInput, TouchableOpacity, FlatList, Switch } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectUserLogin } from '../../redux/user/selectors';
@@ -12,6 +12,7 @@ import styles from './styles';
 
 const MainPage = () => {
   const dispatch = useDispatch();
+  const componentJustMounted = useRef(true);
 
   const login = useSelector(selectUserLogin);
   const items = useSelector(selectSearchItems);
@@ -22,6 +23,34 @@ const MainPage = () => {
 
   const [loadingMore, setLoadingMore] = useState(false);
   const [firstRender, setFirstRender] = useState(true);
+
+  const [sortByStars, setSortByStars] = useState(false);
+  const [sortByForks, setSortByForks] = useState(false);
+  const [sortByAscOrder, setSortByAscOrder] = useState(false);
+
+  const [isFilteringChanged, setIsFilteringChanged] = useState(false);
+
+  const search = pageNumber => {
+    dispatch(
+      searchForRepo.init({
+        repoName,
+        page: pageNumber,
+        sortByStars,
+        sortByForks,
+        order: sortByAscOrder ? 'asc' : 'desc',
+        isFilteringChanged,
+      }),
+    );
+    setIsFilteringChanged(false);
+  };
+
+  useEffect(() => {
+    if (!componentJustMounted.current) {
+      setIsFilteringChanged(true);
+    } else {
+      componentJustMounted.current = false;
+    }
+  }, [sortByStars, sortByForks, sortByAscOrder]);
 
   return (
     <View style={styles.root}>
@@ -34,11 +63,74 @@ const MainPage = () => {
         value={repoName}
         maxLength={30}
       />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          dispatch(searchForRepo.init({ repoName, page: 1 }));
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '60%',
+          marginVertical: 10,
         }}>
+        <Text>Sort By Stars</Text>
+        <Switch
+          trackColor={{ false: '#767577', true: '#81b0ff' }}
+          thumbColor={sortByStars ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={val => {
+              setSortByStars(val)
+              setSortByForks(false)
+          }}
+          value={sortByStars}
+        />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '60%',
+          marginVertical: 10,
+        }}>
+        <Text
+          style={{
+            marginRight: 30,
+          }}>
+          Sort By Forks
+        </Text>
+        <Switch
+          trackColor={{ false: '#767577', true: '#81b0ff' }}
+          thumbColor={sortByForks ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={val => {
+              setSortByForks(val)
+              setSortByStars(false)
+          }}
+          value={sortByForks}
+        />
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '60%',
+          marginVertical: 10,
+        }}>
+        <Text
+          style={{
+            marginRight: 30,
+          }}>
+          Ascending Order
+        </Text>
+        <Switch
+          trackColor={{ false: '#767577', true: '#81b0ff' }}
+          thumbColor={sortByAscOrder ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={setSortByAscOrder}
+          value={sortByAscOrder}
+        />
+      </View>
+      <TouchableOpacity style={styles.button} onPress={() => search(1)}>
         <Text>Search</Text>
       </TouchableOpacity>
       <FlatList
@@ -59,7 +151,7 @@ const MainPage = () => {
           }
 
           setLoadingMore(true);
-          dispatch(searchForRepo.init({ repoName, page }));
+          search(page);
           setPage((prevPage) => prevPage + 1);
           setLoadingMore(false);
         }}

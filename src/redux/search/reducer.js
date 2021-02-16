@@ -13,6 +13,12 @@ export const searchReducer = (state = initialState, action) => {
         [totalCount]: action.payload[totalCount],
         [items]: [...state[items], ...action.payload[items]],
       };
+    case TYPES.SEARCH_FOR_REPO.SUCCESS_REPLACE:
+      return {
+        ...state,
+        [totalCount]: action.payload[totalCount],
+        [items]: [...action.payload[items]],
+      };
     default:
       return {
         ...state,
