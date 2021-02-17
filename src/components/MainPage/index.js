@@ -127,6 +127,7 @@ const MainPage = () => {
           thumbColor={sortByAscOrder ? '#f5dd4b' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
           onValueChange={setSortByAscOrder}
+          disabled={!(sortByStars || sortByForks) }
           value={sortByAscOrder}
         />
       </View>
