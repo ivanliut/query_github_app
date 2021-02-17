@@ -5,6 +5,7 @@ import { name, fullName, htmlUrl, ORDER_ASC, ORDER_DESC } from '../../redux/sear
 import { noop } from '../../utils/noop';
 import { texts } from '../../localizations';
 import Chooser from '../sharedComponents/Chooser';
+import ListItem from '../sharedComponents/ListItem';
 
 import styles from './styles';
 
@@ -112,10 +113,11 @@ const ContentBlock = ({ login, items, totalCount, triggerModal = noop, onSearchP
         onEndReached={fetchOnScroll}
         data={items}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => triggerModal({ isFullScreen: true, url: item[htmlUrl] })}>
-            <Text>{item[name]}</Text>
-            <Text>{item[fullName]}</Text>
-          </TouchableOpacity>
+          <ListItem
+            onPress={() => triggerModal({ isFullScreen: true, url: item[htmlUrl] })}
+            title={item[name]}
+            subtitle={item[fullName]}
+          />
         )}
         keyExtractor={(item) => item.id.toString()}
         ItemSeparatorComponent={() => <View style={styles.divider} />}
