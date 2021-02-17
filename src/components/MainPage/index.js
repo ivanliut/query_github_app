@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, FlatList, Switch } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectUserLogin } from '../../redux/user/selectors';
@@ -7,6 +7,7 @@ import { selectSearchItems, selectSearchTotalCount } from '../../redux/search/se
 import { searchForRepo } from '../../redux/search/actions';
 import { setFullScreenModal } from '../../redux/app/actions';
 import { name, fullName, htmlUrl, ORDER_ASC, ORDER_DESC } from '../../redux/search/constants';
+import Chooser from '../sharedComponents/Chooser';
 
 import styles from './styles';
 
@@ -63,74 +64,41 @@ const MainPage = () => {
         value={repoName}
         maxLength={30}
       />
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+      <Chooser
+        value={sortByStars}
+        onChange={(val) => {
+          setSortByStars(val);
+          setSortByForks(false);
+        }}
+        label={'Sort By Stars'}
+        containerStyle={{
           width: '60%',
           marginVertical: 10,
-        }}>
-        <Text>Sort By Stars</Text>
-        <Switch
-          trackColor={{ false: '#767577', true: '#81b0ff' }}
-          thumbColor={sortByStars ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={(val) => {
-            setSortByStars(val);
-            setSortByForks(false);
-          }}
-          value={sortByStars}
-        />
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '60%',
-          marginVertical: 10,
-        }}>
-        <Text
-          style={{
-            marginRight: 30,
-          }}>
-          Sort By Forks
-        </Text>
-        <Switch
-          trackColor={{ false: '#767577', true: '#81b0ff' }}
-          thumbColor={sortByForks ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={(val) => {
+        }}
+      />
+      <Chooser
+        value={sortByForks}
+        onChange={(val) => {
             setSortByForks(val);
             setSortByStars(false);
-          }}
-          value={sortByForks}
-        />
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+        }}
+        label={'Sort By Forks'}
+        containerStyle={{
           width: '60%',
           marginVertical: 10,
-        }}>
-        <Text
-          style={{
-            marginRight: 30,
-          }}>
-          Ascending Order
-        </Text>
-        <Switch
-          trackColor={{ false: '#767577', true: '#81b0ff' }}
-          thumbColor={sortByAscOrder ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={setSortByAscOrder}
-          disabled={!(sortByStars || sortByForks) }
-          value={sortByAscOrder}
-        />
-      </View>
+        }}
+      />
+      <Chooser
+        value={sortByAscOrder}
+        onChange={setSortByAscOrder}
+        label={'Ascending Order'}
+        disabled={!(sortByStars || sortByForks)}
+        containerStyle={{
+          width: '60%',
+          marginVertical: 10,
+        }}
+      />
+
       <TouchableOpacity style={styles.button} onPress={() => search(1)}>
         <Text>Search</Text>
       </TouchableOpacity>
