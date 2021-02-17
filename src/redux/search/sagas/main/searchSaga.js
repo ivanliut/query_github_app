@@ -2,6 +2,7 @@ import { put } from 'redux-saga/effects';
 
 import { searchForRepo } from '../../actions';
 import { BASE_URL, PER_PAGE } from '../../../../constants';
+import { ORDER_ASC } from '../../constants';
 
 export default function* searchSaga({ payload }) {
   const {
@@ -9,7 +10,7 @@ export default function* searchSaga({ payload }) {
     page,
     sortByStars = false,
     sortByForks = false,
-    order = 'asc',
+    order = ORDER_ASC,
     isFilteringChanged = false,
   } = payload;
 

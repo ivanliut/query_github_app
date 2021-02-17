@@ -6,7 +6,7 @@ import { selectUserLogin } from '../../redux/user/selectors';
 import { selectSearchItems, selectSearchTotalCount } from '../../redux/search/selectors';
 import { searchForRepo } from '../../redux/search/actions';
 import { setFullScreenModal } from '../../redux/app/actions';
-import { name, fullName, htmlUrl } from '../../redux/search/constants';
+import { name, fullName, htmlUrl, ORDER_ASC, ORDER_DESC } from '../../redux/search/constants';
 
 import styles from './styles';
 
@@ -37,7 +37,7 @@ const MainPage = () => {
         page: pageNumber,
         sortByStars,
         sortByForks,
-        order: sortByAscOrder ? 'asc' : 'desc',
+        order: sortByAscOrder ? ORDER_ASC : ORDER_DESC,
         isFilteringChanged,
       }),
     );

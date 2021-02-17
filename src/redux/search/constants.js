@@ -4,6 +4,9 @@ export const TYPES = {
   SEARCH_FOR_REPO: createReduxAsyncType('SEARCH_FOR_REPO'),
 };
 
+export const ORDER_ASC = 'asc';
+export const ORDER_DESC = 'desc';
+
 // Redux store constants
 export const search = 'search';
 export const name = 'name';
