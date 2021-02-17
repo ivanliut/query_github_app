@@ -65,7 +65,9 @@ const ContentBlock = ({ login, items, totalCount, triggerModal = noop, onSearchP
 
   return (
     <View style={styles.root}>
-      <Text style={styles.heading}>{texts.hello}, {login}. {texts.letsFindRepo}</Text>
+      <Text style={styles.heading}>
+        {texts.hello}, {login}. {texts.letsFindRepo}
+      </Text>
       <TextInput
         style={styles.input}
         autoCapitalize="none"

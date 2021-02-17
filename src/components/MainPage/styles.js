@@ -1,4 +1,5 @@
 import { Dimensions, StyleSheet } from 'react-native';
+import { colorsMap } from '../../styles/colorsMap';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -7,7 +8,7 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colorsMap.white,
   },
   heading: {
     marginVertical: 10,
@@ -22,7 +23,7 @@ export default StyleSheet.create({
     marginBottom: 15,
   },
   button: {
-    backgroundColor: 'green',
+    backgroundColor: colorsMap.fireEngineRed3opacity,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,
@@ -32,7 +33,7 @@ export default StyleSheet.create({
     width: screenWidth - 40,
   },
   divider: {
-    backgroundColor: 'gray',
+    backgroundColor: colorsMap.stormGray,
     height: 1,
     marginVertical: 10,
   },
