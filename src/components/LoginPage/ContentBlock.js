@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 
+import { noop } from '../../utils/noop';
+
 import styles from './styles';
 
-const ContentBlock = ({ onLoginPress = () => {} }) => {
+const ContentBlock = ({ onLoginPress = noop }) => {
   const [username, setUsername] = useState('');
   const [token, setToken] = useState('');
 

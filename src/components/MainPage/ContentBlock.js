@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 
 import { name, fullName, htmlUrl, ORDER_ASC, ORDER_DESC } from '../../redux/search/constants';
+import { noop } from '../../utils/noop';
 import Chooser from '../sharedComponents/Chooser';
 
 import styles from './styles';
 
-const ContentBlock = ({ login, items, totalCount, triggerModal = () => {}, onSearchPress = () => {} }) => {
+const ContentBlock = ({ login, items, totalCount, triggerModal = noop, onSearchPress = noop }) => {
   const componentJustMounted = useRef(true);
 
   const [repoName, setRepoName] = useState('');

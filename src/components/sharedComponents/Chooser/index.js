@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, Switch } from 'react-native';
 
+import { noop } from '../../../utils/noop';
+
 import styles from './styles';
 
-const Chooser = ({ value = false, onChange = () => {}, label = '', disabled = false, containerStyle = {} }) => {
+const Chooser = ({ value = false, onChange = noop, label = '', disabled = false, containerStyle = {} }) => {
   return (
     <View style={[styles.root, containerStyle]}>
       <Text>{label}</Text>
