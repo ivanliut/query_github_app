@@ -36,4 +36,8 @@ export default StyleSheet.create({
     height: 1,
     marginVertical: 10,
   },
+  chooser: {
+    width: '60%',
+    marginVertical: 10,
+  },
 });

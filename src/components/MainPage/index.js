@@ -71,10 +71,7 @@ const MainPage = () => {
           setSortByForks(false);
         }}
         label={'Sort By Stars'}
-        containerStyle={{
-          width: '60%',
-          marginVertical: 10,
-        }}
+        containerStyle={styles.chooser}
       />
       <Chooser
         value={sortByForks}
@@ -83,20 +80,14 @@ const MainPage = () => {
             setSortByStars(false);
         }}
         label={'Sort By Forks'}
-        containerStyle={{
-          width: '60%',
-          marginVertical: 10,
-        }}
+        containerStyle={styles.chooser}
       />
       <Chooser
         value={sortByAscOrder}
         onChange={setSortByAscOrder}
         label={'Ascending Order'}
         disabled={!(sortByStars || sortByForks)}
-        containerStyle={{
-          width: '60%',
-          marginVertical: 10,
-        }}
+        containerStyle={styles.chooser}
       />
 
       <TouchableOpacity style={styles.button} onPress={() => search(1)}>
