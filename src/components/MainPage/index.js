@@ -45,6 +45,26 @@ const MainPage = () => {
     setIsFilteringChanged(false);
   };
 
+  const fetchOnScroll = () => {
+      if (firstRender) {
+          setFirstRender(false);
+          return;
+      }
+
+      if (loadingMore) {
+          return;
+      }
+
+      if (page > totalCount) {
+          return;
+      }
+
+      setLoadingMore(true);
+      search(page);
+      setPage((prevPage) => prevPage + 1);
+      setLoadingMore(false);
+  }
+
   useEffect(() => {
     if (!componentJustMounted.current) {
       setIsFilteringChanged(true);
@@ -93,28 +113,11 @@ const MainPage = () => {
       <TouchableOpacity style={styles.button} onPress={() => search(1)}>
         <Text>Search</Text>
       </TouchableOpacity>
+
       <FlatList
         contentContainerStyle={styles.list}
         onEndReachedThreshold={0.01}
-        onEndReached={() => {
-          if (firstRender) {
-            setFirstRender(false);
-            return;
-          }
-
-          if (loadingMore) {
-            return;
-          }
-
-          if (page > totalCount) {
-            return;
-          }
-
-          setLoadingMore(true);
-          search(page);
-          setPage((prevPage) => prevPage + 1);
-          setLoadingMore(false);
-        }}
+        onEndReached={fetchOnScroll}
         data={items}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => dispatch(setFullScreenModal({ isFullScreen: true, url: item[htmlUrl] }))}>
