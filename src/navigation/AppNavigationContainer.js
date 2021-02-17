@@ -9,13 +9,15 @@ import { STACKS } from './constants';
 import { navigationHelper } from './utils/navigationHelpers';
 import Modal from '../components/Modal';
 
+import sharedStyles from '../styles/sharedStyles';
+
 const Stack = createStackNavigator();
 const rootNavigationRef = createRef();
 navigationHelper.setRootNavigationRef(rootNavigationRef);
 
 const AppNavigationContainer = () => {
   return (
-    <View style={{ flex: 1 }}>
+    <View style={sharedStyles.takeAvailableSpace}>
       <NavigationContainer ref={rootNavigationRef}>
         <Stack.Navigator headerMode={'none'}>
           <Stack.Screen name={STACKS.LoginStack} component={LoginStack} />

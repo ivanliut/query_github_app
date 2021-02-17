@@ -9,6 +9,7 @@ import { texts } from '../../localizations';
 import { useValueObserver } from '../../hooks/useValueObserver';
 import { useModalAnimation } from './useModalAnimation';
 
+import sharedStyles from '../../styles/sharedStyles';
 import styles from './styles';
 
 const { height: screenHeight } = Dimensions.get('window');
@@ -45,7 +46,7 @@ const Modal = () => {
       ]}>
       <View style={styles.container}>
         <View style={styles.row}>
-          <View style={styles.takeAvailableSpace} />
+          <View style={sharedStyles.takeAvailableSpace} />
 
           <TouchableOpacity
             onPress={() => {

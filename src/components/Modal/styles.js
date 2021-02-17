@@ -17,9 +17,6 @@ export default StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-  takeAvailableSpace: {
-    flex: 1,
-  },
   button: {
     fontSize: 24,
     marginHorizontal: 10,
