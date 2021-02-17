@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 
+import { texts } from '../../localizations';
+
 import { noop } from '../../utils/noop';
 
 import styles from './styles';
@@ -15,7 +17,7 @@ const ContentBlock = ({ onLoginPress = noop }) => {
         style={styles.input}
         autoCapitalize="none"
         autoCorrect={false}
-        placeholder="Username"
+        placeholder={texts.username}
         onChangeText={(text) => setUsername(text)}
         value={username}
         maxLength={40}
@@ -24,13 +26,13 @@ const ContentBlock = ({ onLoginPress = noop }) => {
         style={styles.input}
         secureTextEntry={true}
         autoCapitalize="none"
-        placeholder="Token"
+        placeholder={texts.token}
         onChangeText={(text) => setToken(text)}
         value={token}
         maxLength={40}
       />
       <TouchableOpacity style={styles.button} onPress={() => onLoginPress({ username, token })}>
-        <Text>Login</Text>
+        <Text>{texts.login}</Text>
       </TouchableOpacity>
     </View>
   );

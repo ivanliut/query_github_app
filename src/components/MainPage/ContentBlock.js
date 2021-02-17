@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native'
 
 import { name, fullName, htmlUrl, ORDER_ASC, ORDER_DESC } from '../../redux/search/constants';
 import { noop } from '../../utils/noop';
+import { texts } from '../../localizations';
 import Chooser from '../sharedComponents/Chooser';
 
 import styles from './styles';
@@ -64,11 +65,11 @@ const ContentBlock = ({ login, items, totalCount, triggerModal = noop, onSearchP
 
   return (
     <View style={styles.root}>
-      <Text style={styles.heading}>Hello {login}, Let's find a repo!</Text>
+      <Text style={styles.heading}>{texts.hello}, {login}. {texts.letsFindRepo}</Text>
       <TextInput
         style={styles.input}
         autoCapitalize="none"
-        placeholder="repo name"
+        placeholder={texts.repoName}
         onChangeText={(text) => setRepoName(text)}
         value={repoName}
         maxLength={30}
@@ -79,7 +80,7 @@ const ContentBlock = ({ login, items, totalCount, triggerModal = noop, onSearchP
           setSortByStars(val);
           setSortByForks(false);
         }}
-        label={'Sort By Stars'}
+        label={texts.sortByStars}
         containerStyle={styles.chooser}
       />
       <Chooser
@@ -88,19 +89,19 @@ const ContentBlock = ({ login, items, totalCount, triggerModal = noop, onSearchP
           setSortByForks(val);
           setSortByStars(false);
         }}
-        label={'Sort By Forks'}
+        label={texts.sortByForks}
         containerStyle={styles.chooser}
       />
       <Chooser
         value={sortByAscOrder}
         onChange={setSortByAscOrder}
-        label={'Ascending Order'}
+        label={texts.ascendingOrder}
         disabled={!(sortByStars || sortByForks)}
         containerStyle={styles.chooser}
       />
 
       <TouchableOpacity style={styles.button} onPress={() => search(1)}>
-        <Text>Search</Text>
+        <Text>{texts.search}</Text>
       </TouchableOpacity>
 
       <FlatList

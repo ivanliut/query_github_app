@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { View, Text, TouchableOpacity, Dimensions, Animated, Easing } from 'react-native';
+import { View, Text, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import { WebView } from 'react-native-webview';
 
 import { setFullScreenModal } from '../../redux/app/actions';
 import { selectIsFullScreenModal, selectWebViewUrl } from '../../redux/app/selectors';
+import { texts } from '../../localizations';
 import { useValueObserver } from '../../hooks/useValueObserver';
 import { useModalAnimation } from './useModalAnimation';
 
@@ -51,7 +52,7 @@ const Modal = () => {
               finishAnimation();
               dispatch(setFullScreenModal(false));
             }}>
-            <Text style={styles.button}>Close</Text>
+            <Text style={styles.button}>{texts.close}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.webviewContainer}>
