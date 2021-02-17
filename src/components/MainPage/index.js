@@ -46,24 +46,24 @@ const MainPage = () => {
   };
 
   const fetchOnScroll = () => {
-      if (firstRender) {
-          setFirstRender(false);
-          return;
-      }
+    if (firstRender) {
+      setFirstRender(false);
+      return;
+    }
 
-      if (loadingMore) {
-          return;
-      }
+    if (loadingMore) {
+      return;
+    }
 
-      if (page > totalCount) {
-          return;
-      }
+    if (page > totalCount) {
+      return;
+    }
 
-      setLoadingMore(true);
-      search(page);
-      setPage((prevPage) => prevPage + 1);
-      setLoadingMore(false);
-  }
+    setLoadingMore(true);
+    search(page);
+    setPage((prevPage) => prevPage + 1);
+    setLoadingMore(false);
+  };
 
   useEffect(() => {
     if (!componentJustMounted.current) {
@@ -96,8 +96,8 @@ const MainPage = () => {
       <Chooser
         value={sortByForks}
         onChange={(val) => {
-            setSortByForks(val);
-            setSortByStars(false);
+          setSortByForks(val);
+          setSortByStars(false);
         }}
         label={'Sort By Forks'}
         containerStyle={styles.chooser}

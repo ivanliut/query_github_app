@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { PAGES } from '../constants';
-import LoginPage from '../../components/LoginPage';
+import LoginPage from '../../containers/LoginPage';
 
 const Stack = createStackNavigator();
 
