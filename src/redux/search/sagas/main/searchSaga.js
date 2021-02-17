@@ -22,8 +22,7 @@ export default function* searchSaga({ payload }) {
 
   if (sortByStars) {
     searchUrl += `&sort=stars&order=${order}`;
-  }
-  if (sortByForks) {
+  } else if (sortByForks) {
     searchUrl += `&sort=forks&order=${order}`;
   }
 
@@ -38,7 +37,7 @@ export default function* searchSaga({ payload }) {
     const { total_count, items } = yield response.json();
     if (isFilteringChanged) {
       yield put(searchForRepo.success_replace({ total_count, items }));
-      return
+      return;
     }
 
     yield put(searchForRepo.success({ total_count, items }));

@@ -30,7 +30,7 @@ const MainPage = () => {
 
   const [isFilteringChanged, setIsFilteringChanged] = useState(false);
 
-  const search = pageNumber => {
+  const search = (pageNumber) => {
     dispatch(
       searchForRepo.init({
         repoName,
@@ -76,9 +76,9 @@ const MainPage = () => {
           trackColor={{ false: '#767577', true: '#81b0ff' }}
           thumbColor={sortByStars ? '#f5dd4b' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={val => {
-              setSortByStars(val)
-              setSortByForks(false)
+          onValueChange={(val) => {
+            setSortByStars(val);
+            setSortByForks(false);
           }}
           value={sortByStars}
         />
@@ -101,9 +101,9 @@ const MainPage = () => {
           trackColor={{ false: '#767577', true: '#81b0ff' }}
           thumbColor={sortByForks ? '#f5dd4b' : '#f4f3f4'}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={val => {
-              setSortByForks(val)
-              setSortByStars(false)
+          onValueChange={(val) => {
+            setSortByForks(val);
+            setSortByStars(false);
           }}
           value={sortByForks}
         />
